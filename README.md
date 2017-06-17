@@ -1,2 +1,6 @@
 # VMSS-Custom-Windows-Managed-Disk
-Using Vitrual Machine Scale Set using custom Windows Server images with Managed Disks
+Deploy Virtual Machine Scale Set using custom Windows Server images with Managed Disks
+
+Under development :) 
+
+Just kidding, already finished (At this moment I'm creating the ReadME)
