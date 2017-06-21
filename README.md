@@ -23,10 +23,10 @@ During the deployment of the template you will need to use the same Resource Gro
 
 Click the button bellow to deploy the first template 
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMSS-Custom-Windows-Managed-Disk%2F201-vmss-win-managed.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMSS-Custom-Windows-Managed-Disk%2Fmaster%2F201-vmss-win-managed.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMSS-Custom-Windows-Managed-Disk%2F201-vmss-win-managed.json" target="_blank">
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMSS-Custom-Windows-Managed-Disk%2Fmaster%2F201-vmss-win-managed.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
@@ -139,10 +139,10 @@ Now you are ready to deploy the VMSS using this image. Also you can use this ima
 
 Click the button bellow to deploy the second template 
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMSS-Custom-Windows-Managed-Disk%2F202-vmss-win-managed.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMSS-Custom-Windows-Managed-Disk%2Fmaster%2F202-vmss-win-managed.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMSS-Custom-Windows-Managed-Disk%2F202-vmss-win-managed.json" target="_blank">
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMSS-Custom-Windows-Managed-Disk%2Fmaster%2F202-vmss-win-managed.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
