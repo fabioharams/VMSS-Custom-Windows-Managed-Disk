@@ -13,12 +13,6 @@ Also I would like to thanks [(Marcelo Matias)](https://twitter.com/marcelo_matia
 - Updated version of Azure PowerShell [(more information here)](https://docs.microsoft.com/en-us/powershell/azure/install-azurerm-ps?view=azurermps-4.1.0)
 
 
-## Important Notes ##
-
-### Use the same Resource Group ###
-During the deployment of the template you will need to use the same Resource Group. This is because the second template to deploy VMSS cannot load an image located on another Resource Group. To be fixed later. 
-
-
 ## Deploy the base image ##
 
 Click the button bellow to deploy the first template 
@@ -113,6 +107,25 @@ $image = New-AzureRmImageConfig -Location $location -SourceVirtualMachineId $vm.
 New-AzureRmImage -Image $image -ImageName $imageName -ResourceGroupName $rgName
 ```
 
+- Capture the Image ID
+```
+(Get-AzureRmImage -ResourceGroupName $rgName -ImageName $imageName).Id
+```
+
+- The command will generate something like this:
+```
+/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/xxxxx/providers/Microsoft.Compute/images/xxxxx
+```
+
+Use this information to fill the field "Image ID" on the second template (202-vmss-win-managed.json) - instructions bellow
+
+### Important Notes ###
+
+This process allow to use the Image on another Resource Group (but must be on the same region)
+
+
+
+
 ## Remove unnecessary itens ##
 
 In order to install a Scale Set in the same availability set, we need to remove the VM and other unnecessary objects.
@@ -132,6 +145,7 @@ Remove-AzureRmDisk -ResourceGroupName $rgName -DiskName Demo-VM -Force
 Remove-AzureRmDisk -ResourceGroupName $rgName -DiskName Demo-VM-data -Force
 Remove-AzureRmLoadBalancer -ResourceGroupName $rgName -Name PublicLB -Force
 ```
+
 
 Now you are ready to deploy the VMSS using this image. Also you can use this image to deploy a single VM. 
 
@@ -163,9 +177,6 @@ If you want to manually deploy this template just follow the procedures bellow
 ![template deployment3](IMG/5.PNG)
 
 - Fill the form and then click PURCHASE. The deployment will start and you just need to wait few minutes. 
-
-### Use the same Resource Group ###
-During the deployment of the template you will need to use the same Resource Group. This is because the second template to deploy VMSS cannot load an image located on another Resource Group. To be fixed later. 
 
 
 After the deploy finish the execution process you can access your Resource Group and check all objects created
