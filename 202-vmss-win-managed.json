@@ -14,22 +14,7 @@
       "defaultValue": 3,
       "type": "int"
     },
-    "windowsOSVersion": {
-      "type": "string",
-      "defaultValue": "2016-Datacenter",
-      "allowedValues": [
-        "2008-R2-SP1",
-        "2012-Datacenter",
-        "2012-R2-Datacenter",
-        "2016-Nano-Server",
-        "2016-Datacenter-with-Containers",
-        "2016-Datacenter"
-      ],
-      "metadata": {
-        "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version. Allowed values: 2008-R2-SP1, 2012-Datacenter, 2012-R2-Datacenter."
-      }
-      },
-    "VM Size": {
+     "VM Size": {
       "defaultValue": "Standard_DS2_v2",
       "type": "string",
       "allowedValues": [
@@ -48,6 +33,13 @@
         "description": "SKU of the VM."
       }
     },
+    "Image ID": {
+      "defaultValue": "",
+      "type":"string",
+      "metadata": {
+        "description": "Image ID"
+      }
+    },
     "Public Domain Label": {
       "type": "string"
     }
@@ -63,7 +55,10 @@
     "Scale Set Name": "Demo-ScaleSet",
     "Image Name": "myImage",
     "VM Prefix": "Demo-VM",
-    "IP Config Name": "ipConfig"
+    "IP Config Name": "ipConfig",
+    "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('Public LB Name'))]",
+    "lbWebProbeName": "TCP-Probe",
+    "lbWebProbeID": "[concat(variables('lbID'),'/probes/',variables('lbWebProbeName'))]"
   },
   "resources": [
     {
@@ -135,10 +130,29 @@
             "name": "[variables('Front Address Pool Name')]"
           }
         ],
-        "loadBalancingRules": [],
+        "loadBalancingRules": [
+        {
+            "name": "weblb",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('Public LB Name')), '/frontendIPConfigurations/loadBalancerFrontEnd')]"
+              },
+              "backendAddressPool": {
+                "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/loadBalancers/', variables('Public LB Name'), '/backendAddressPools/', variables('Front Address Pool Name'))]"
+              },
+              "probe": {
+                "id": "[variables('lbWebProbeID')]"
+              },
+              "protocol": "tcp",
+              "frontendPort": "80",
+              "backendPort": "80",
+              "enableFloatingIP": false
+            }
+          }
+        ],
         "probes": [
           {
-            "name": "TCP-Probe",
+            "name": "[variables('lbWebProbeName')]",
             "properties": {
               "protocol": "Tcp",
               "port": 80,
@@ -284,9 +298,9 @@
               }
             },
             "imageReference": {
-              "id": "[resourceId('Microsoft.Compute/images', variables('Image Name'))]"
+              "id": "[parameters('Image ID')]"
             },
-            "dataDisks": [
+           "dataDisks": [
               {
                 "createOption": "FromImage",
                 "lun": "2",
