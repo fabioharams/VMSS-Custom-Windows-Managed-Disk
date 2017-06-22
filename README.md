@@ -174,8 +174,6 @@ If you want to manually deploy this template just follow the procedures bellow
 ![template deployment2](IMG/2.PNG)
 - Copy the entire content of the template 202-vmss-win-managed.json and click SAVE
 
-![template deployment3](IMG/5.PNG)
-
 - Fill the form and then click PURCHASE. The deployment will start and you just need to wait few minutes. 
 
 
